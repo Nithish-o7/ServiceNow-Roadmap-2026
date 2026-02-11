@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServiceNow Roadmap 2026</title>
-    <!-- Added ServiceNow Favicon -->
+    <!-- ServiceNow Favicon -->
     <link rel="icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
     
@@ -42,7 +42,7 @@
 
         /* Header Style */
         .sn-header {
-            background: rgba(11, 18, 18, 0.85); /* Increased opacity for readability */
+            background: rgba(11, 18, 18, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--sn-border);
             padding: 1.5rem 0;
@@ -55,8 +55,8 @@
         }
 
         .sn-logo-text {
-            font-weight: 900; /* Extra Bold */
-            font-size: 2.8rem; /* Slightly larger */
+            font-weight: 900;
+            font-size: 2.8rem;
             letter-spacing: -1.5px; 
             display: inline-block;
             line-height: 1;
@@ -130,7 +130,6 @@
         .timeline-wrapper {
             position: relative;
             z-index: 10;
-            /* CRITICAL FIX: Increased top padding to 350px to clear the header */
             padding: 350px 50px 100px 50px; 
             overflow-x: auto;
             white-space: nowrap;
@@ -205,28 +204,28 @@
 
         /* UP Items: Content above the line */
         .item-up .content-box {
-            bottom: 95px; /* Distance from the node */
+            bottom: 95px;
         }
 
         /* DOWN Items: Content below the line */
         .item-down .content-box {
-            top: 95px; /* Distance from the node */
+            top: 95px;
         }
 
         /* Connector Lines */
         .item-up .connector {
             position: absolute;
-            bottom: 60px; /* Starts right above the node */
+            bottom: 60px;
             width: 2px;
-            height: 15px; /* Short length */
+            height: 15px;
             background: var(--sn-green);
         }
 
         .item-down .connector {
             position: absolute;
-            top: 60px; /* Starts right below the node */
+            top: 60px;
             width: 2px;
-            height: 15px; /* Short length */
+            height: 15px;
             background: var(--sn-green);
         }
 
@@ -234,10 +233,10 @@
             color: var(--sn-green);
             font-weight: 800;
             text-transform: uppercase;
-            font-size: 0.85rem; /* Slightly larger for visibility */
+            font-size: 0.85rem;
             letter-spacing: 2px;
             margin-bottom: 8px; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Shadow to pop against bg */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .event-title {
@@ -326,7 +325,7 @@
             <div class="timeline-container">
                 <div class="timeline-line"></div>
                 
-                <!-- Feb 2nd Week -->
+                <!-- 1. Feb 2nd Week -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">February</div>
@@ -337,7 +336,7 @@
                     <div class="node">01</div>
                 </div>
 
-                <!-- NEW: Project 1 Start -->
+                <!-- 2. Feb 9: Project 1 Kickoff -->
                 <div class="timeline-item item-down">
                     <div class="node">02</div>
                     <div class="connector"></div>
@@ -348,7 +347,7 @@
                     </div>
                 </div>
 
-                <!-- Feb 2nd/3rd Week -->
+                <!-- 3. Feb 2nd/3rd Week -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">February</div>
@@ -359,7 +358,7 @@
                     <div class="node">03</div>
                 </div>
 
-                <!-- Feb Last Week -->
+                <!-- 4. Feb Last Week -->
                 <div class="timeline-item item-down">
                     <div class="node">04</div>
                     <div class="connector"></div>
@@ -370,7 +369,7 @@
                     </div>
                 </div>
 
-                <!-- NEW: Project 1 Final Review -->
+                <!-- 5. March 6: Project 1 Final Review -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">March 6</div>
@@ -381,7 +380,7 @@
                     <div class="node">05</div>
                 </div>
 
-                <!-- March 1st Week -->
+                <!-- 6. March 1st Week -->
                 <div class="timeline-item item-down">
                     <div class="node">06</div>
                     <div class="connector"></div>
@@ -392,7 +391,7 @@
                     </div>
                 </div>
 
-                <!-- March 1st Week - RENAMED to Project 2 -->
+                <!-- 7. March 1st Week: Project 2 Use Case -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">March</div>
@@ -400,3 +399,240 @@
                         <div class="week-tag">First Week</div>
                     </div>
                     <div class="connector"></div>
+                    <div class="node">07</div>
+                </div>
+
+                <!-- 8. March 2nd Week: Resume Submission -->
+                <div class="timeline-item item-down">
+                    <div class="node">08</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">March</div>
+                        <div class="event-title">Resume Submission</div>
+                        <div class="week-tag">Hard Copy • Second Week</div>
+                    </div>
+                </div>
+
+                <!-- 9. March Full: Problem Solving -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">March</div>
+                        <div class="event-title">Problem Solving</div>
+                        <div class="week-tag">Full Month Focus</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">09</div>
+                </div>
+
+                <!-- 10. April 1st/2nd Week: Project 2 Review -->
+                <div class="timeline-item item-down">
+                    <div class="node">10</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">April</div>
+                        <div class="event-title">Project 2 Review</div>
+                        <div class="week-tag">First or Second Week</div>
+                    </div>
+                </div>
+
+                <!-- 11. April / May -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">April / May</div>
+                        <div class="event-title">ServiceNow AI Summit</div>
+                        <div class="week-tag">Tentative Schedule</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">11</div>
+                </div>
+
+                <!-- 12. June -->
+                <div class="timeline-item item-down buffer-month">
+                    <div class="node">12</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">June</div>
+                        <div class="event-title">Open Schedule</div>
+                        <div class="week-tag">Buffer for Consolidation</div>
+                    </div>
+                </div>
+
+                <!-- 13. July -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">July</div>
+                        <div class="event-title">ServiceNow HackNow Hackathon</div>
+                        <div class="week-tag">Innovation Drive</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">13</div>
+                </div>
+
+                <!-- 14. August -->
+                <div class="timeline-item item-down buffer-month">
+                    <div class="node">14</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">August</div>
+                        <div class="event-title">Open Schedule</div>
+                        <div class="week-tag">Flexible Buffer Period</div>
+                    </div>
+                </div>
+
+                <!-- 15. September -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">September</div>
+                        <div class="event-title">ServiceNow Hiring</div>
+                        <div class="week-tag">Placement Window</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">15</div>
+                </div>
+
+                <!-- 16. Oct to Dec -->
+                <div class="timeline-item item-down buffer-month">
+                    <div class="node">16</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">October — December</div>
+                        <div class="event-title">Open Schedule</div>
+                        <div class="week-tag">Pre-Onboarding & Academics</div>
+                    </div>
+                </div>
+
+                <!-- 17. Jan to July 2027 -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">January — July 2027</div>
+                        <div class="event-title">Internship Phase</div>
+                        <div class="week-tag">Professional Experience</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">17</div>
+                </div>
+
+                <!-- 18. July 2027 -->
+                <div class="timeline-item item-down">
+                    <div class="node">18</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">July 2027</div>
+                        <div class="event-title">Full Time Conversion</div>
+                        <div class="week-tag">Success Goal</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div class="scroll-hint">
+        <i class="fas fa-arrows-alt-h"></i> Scroll horizontally to view the full roadmap
+    </div>
+
+    <script>
+        // --- Three.js Fluid Background ---
+        let scene, camera, renderer, mesh;
+
+        function init3D() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // Create a fluid, wave-like grid
+            const geometry = new THREE.PlaneGeometry(30, 15, 80, 40);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x1d2d2d,
+                emissive: 0x81b5a1,
+                emissiveIntensity: 0.15,
+                wireframe: true,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.1
+            });
+
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.rotation.x = -0.8;
+            scene.add(mesh);
+
+            const light = new THREE.PointLight(0x03eb5d, 1, 50);
+            light.position.set(0, 5, 5);
+            scene.add(light);
+
+            const ambient = new THREE.AmbientLight(0xffffff, 0.2);
+            scene.add(ambient);
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = performance.now() * 0.0008;
+            
+            const pos = mesh.geometry.attributes.position;
+            for (let i = 0; i < pos.count; i++) {
+                const x = pos.getX(i);
+                const y = pos.getY(i);
+                // Complex wave movement
+                const z = Math.sin(x * 0.3 + time) * 0.8 + Math.cos(y * 0.3 + time) * 0.8;
+                pos.setZ(i, z);
+            }
+            pos.needsUpdate = true;
+            
+            renderer.render(scene, camera);
+        }
+
+        // --- Stats Counter Animation ---
+        function animateStats() {
+            const counters = document.querySelectorAll('.count');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const duration = 2000; // 2 seconds
+                const increment = target / (duration / 16); // 60fps
+                
+                if (target === 0) {
+                    counter.innerText = 0;
+                    return;
+                }
+
+                let current = 0;
+                const updateCount = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // --- Custom Horizontal Scroll ---
+        const scrollContainer = document.getElementById('timelineScroll');
+        scrollContainer.addEventListener('wheel', (evt) => {
+            if (evt.deltaY !== 0) {
+                evt.preventDefault();
+                scrollContainer.scrollLeft += evt.deltaY;
+            }
+        });
+
+        window.onload = () => {
+            init3D();
+            setTimeout(animateStats, 500); // Start stats animation after slight delay
+        };
+    </script>
+</body>
+</html>
