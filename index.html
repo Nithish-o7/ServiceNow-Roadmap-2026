@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ServiceNow Roadmap 2026</title>
+    <!-- Added ServiceNow Favicon -->
+    <link rel="icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+        :root {
+            --sn-green: #81b5a1;
+            --sn-bright-green: #03eb5d;
+            --sn-dark-bg: #0b1212;
+            --sn-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--sn-dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header Style */
+        .sn-header {
+            background: rgba(11, 18, 18, 0.85); /* Increased opacity for readability */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--sn-border);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .sn-logo-text {
+            font-weight: 900; /* Extra Bold */
+            font-size: 2.8rem; /* Slightly larger */
+            letter-spacing: -1.5px; 
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .sn-logo-text span {
+            color: var(--sn-green);
+            font-weight: 900; 
+            letter-spacing: -1px;
+        }
+
+        /* Live Dashboard Stats */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--sn-border);
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 220px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--sn-green);
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .stat-info h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 2px;
+        }
+
+        .stat-info .count {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .stat-info .total {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            font-weight: 400;
+        }
+
+        /* Timeline Container */
+        .timeline-wrapper {
+            position: relative;
+            z-index: 10;
+            /* CRITICAL FIX: Increased top padding to 350px to clear the header */
+            padding: 350px 50px 100px 50px; 
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .timeline-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .timeline-container {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            min-width: 100%;
+            padding-bottom: 50px;
+        }
+
+        /* The Main Horizontal Line */
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            position: relative;
+            z-index: 2;
+            width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .node {
+            width: 60px;
+            height: 60px;
+            background: var(--sn-dark-bg);
+            border: 4px solid var(--sn-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(129, 181, 161, 0.3);
+            cursor: pointer;
+            position: relative;
+            z-index: 5;
+        }
+
+        .timeline-item:hover .node {
+            transform: scale(1.2);
+            border-color: var(--sn-bright-green);
+            box-shadow: 0 0 30px rgba(3, 235, 93, 0.5);
+        }
+
+        .content-box {
+            position: absolute;
+            width: 280px;
+            text-align: center;
+            white-space: normal;
+        }
+
+        /* UP Items: Content above the line */
+        .item-up .content-box {
+            bottom: 95px; /* Distance from the node */
+        }
+
+        /* DOWN Items: Content below the line */
+        .item-down .content-box {
+            top: 95px; /* Distance from the node */
+        }
+
+        /* Connector Lines */
+        .item-up .connector {
+            position: absolute;
+            bottom: 60px; /* Starts right above the node */
+            width: 2px;
+            height: 15px; /* Short length */
+            background: var(--sn-green);
+        }
+
+        .item-down .connector {
+            position: absolute;
+            top: 60px; /* Starts right below the node */
+            width: 2px;
+            height: 15px; /* Short length */
+            background: var(--sn-green);
+        }
+
+        .month-label {
+            color: var(--sn-green);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.85rem; /* Slightly larger for visibility */
+            letter-spacing: 2px;
+            margin-bottom: 8px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Shadow to pop against bg */
+        }
+
+        .event-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .week-tag {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 6px;
+            color: #ccc;
+        }
+
+        .buffer-month .event-title {
+            opacity: 0.5;
+            font-weight: 400;
+        }
+        .buffer-month .node {
+            border-color: #4b5563;
+            box-shadow: none;
+        }
+
+        .scroll-hint {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 3D Fluid Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Header with Live Dashboard -->
+    <header class="sn-header">
+        <h1 class="sn-logo-text">ServiceNow <span>Roadmap 2026</span></h1>
+        
+        <!-- Live Stats Dashboard -->
+        <div class="stats-container">
+            <!-- CSA Stats -->
+            <div class="stat-card">
+                <div class="stat-icon bg-green-500/20 text-green-400">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>CSA Certified</h3>
+                    <div>
+                        <span class="count" data-target="48">0</span>
+                        <span class="total">/ 63</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAD Stats -->
+            <div class="stat-card">
+                <div class="stat-icon bg-blue-500/20 text-blue-400">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>CAD Certified</h3>
+                    <div>
+                        <span class="count" data-target="0">0</span>
+                        <span class="total">/ 63</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Horizontal Timeline Section -->
+    <main class="min-h-screen flex items-center">
+        <div class="timeline-wrapper" id="timelineScroll">
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Feb 2nd Week -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">February</div>
+                        <div class="event-title">Aptitude & Communication</div>
+                        <div class="week-tag">Starting from Second Week</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">01</div>
+                </div>
+
+                <!-- NEW: Project 1 Start -->
+                <div class="timeline-item item-down">
+                    <div class="node">02</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">February 9</div>
+                        <div class="event-title">Project 1 Kickoff</div>
+                        <div class="week-tag">Project Start Date</div>
+                    </div>
+                </div>
+
+                <!-- Feb 2nd/3rd Week -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">February</div>
+                        <div class="event-title">ServiceNow Expert Interaction Program</div>
+                        <div class="week-tag">Second or Third Week</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">03</div>
+                </div>
+
+                <!-- Feb Last Week -->
+                <div class="timeline-item item-down">
+                    <div class="node">04</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">February</div>
+                        <div class="event-title">Certification Completion</div>
+                        <div class="week-tag">Last Week</div>
+                    </div>
+                </div>
+
+                <!-- NEW: Project 1 Final Review -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">March 6</div>
+                        <div class="event-title">Project 1 Final Review</div>
+                        <div class="week-tag">Submission & Evaluation</div>
+                    </div>
+                    <div class="connector"></div>
+                    <div class="node">05</div>
+                </div>
+
+                <!-- March 1st Week -->
+                <div class="timeline-item item-down">
+                    <div class="node">06</div>
+                    <div class="connector"></div>
+                    <div class="content-box">
+                        <div class="month-label">March</div>
+                        <div class="event-title">ServiceNow Technical Mentorship Workshop</div>
+                        <div class="week-tag">First Week</div>
+                    </div>
+                </div>
+
+                <!-- March 1st Week - RENAMED to Project 2 -->
+                <div class="timeline-item item-up">
+                    <div class="content-box">
+                        <div class="month-label">March</div>
+                        <div class="event-title">Project 2 Use Case</div>
+                        <div class="week-tag">First Week</div>
+                    </div>
+                    <div class="connector"></div>
