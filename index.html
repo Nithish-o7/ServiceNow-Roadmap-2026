@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServiceNow Roadmap 2026</title>
     
-    <!-- ServiceNow Favicon (Embedded directly to prevent blocking) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23ffffff%22/><path d=%22M70 30L40 70H30L60 30H70Z%22 fill=%22%2381b5a1%22/><circle cx=%2235%22 cy=%2235%22 r=%228%22 fill=%22%231d2d2d%22/></svg>" type="image/svg+xml">
+    <!-- ServiceNow Favicon -->
+    <link rel="icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
     
-    <!-- Updated Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Updated FontAwesome (v6.4.0) to fix missing icons on GitHub -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -46,18 +42,19 @@
             pointer-events: none;
         }
 
-        /* Header Style */
+        /* --- RESPONSIVE HEADER --- */
         .sn-header {
-            background: rgba(11, 18, 18, 0.85);
+            background: rgba(11, 18, 18, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--sn-border);
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             text-align: center;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 50;
             box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
 
         .sn-logo-text {
@@ -74,7 +71,7 @@
             letter-spacing: -1px;
         }
 
-        /* Live Dashboard Stats */
+        /* --- DASHBOARD STATS --- */
         .stats-container {
             display: flex;
             justify-content: center;
@@ -93,58 +90,19 @@
             gap: 1rem;
             min-width: 220px;
             backdrop-filter: blur(5px);
-            transition: transform 0.3s ease;
         }
 
-        .stat-card:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--sn-green);
-        }
-
-        .stat-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .stat-info h3 {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.7;
-            margin-bottom: 2px;
-        }
-
-        .stat-info .count {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: white;
-        }
-
-        .stat-info .total {
-            font-size: 0.9rem;
-            opacity: 0.5;
-            font-weight: 400;
-        }
-
-        /* Timeline Container */
+        /* --- TIMELINE WRAPPER (DESKTOP) --- */
         .timeline-wrapper {
             position: relative;
             z-index: 10;
             padding: 350px 50px 100px 50px; 
             overflow-x: auto;
             white-space: nowrap;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
-
-        .timeline-wrapper::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
+        
+        .timeline-wrapper::-webkit-scrollbar { display: none; }
 
         .timeline-container {
             display: inline-flex;
@@ -154,7 +112,7 @@
             padding-bottom: 50px;
         }
 
-        /* The Main Horizontal Line */
+        /* --- TIMELINE ITEMS (DESKTOP) --- */
         .timeline-line {
             position: absolute;
             top: 50%;
@@ -166,7 +124,6 @@
             z-index: 1;
         }
 
-        /* Timeline Items */
         .timeline-item {
             position: relative;
             z-index: 2;
@@ -193,12 +150,7 @@
             cursor: pointer;
             position: relative;
             z-index: 5;
-        }
-
-        .timeline-item:hover .node {
-            transform: scale(1.2);
-            border-color: var(--sn-bright-green);
-            box-shadow: 0 0 30px rgba(3, 235, 93, 0.5);
+            flex-shrink: 0;
         }
 
         .content-box {
@@ -208,65 +160,108 @@
             white-space: normal;
         }
 
-        /* UP Items: Content above the line */
-        .item-up .content-box {
-            bottom: 95px;
+        /* Desktop specific alignments */
+        @media (min-width: 769px) {
+            .item-up .content-box { bottom: 95px; }
+            .item-down .content-box { top: 95px; }
+            .item-up .connector { position: absolute; bottom: 60px; width: 2px; height: 15px; background: var(--sn-green); }
+            .item-down .connector { position: absolute; top: 60px; width: 2px; height: 15px; background: var(--sn-green); }
         }
 
-        /* DOWN Items: Content below the line */
-        .item-down .content-box {
-            top: 95px;
+        /* --- MOBILE LAYOUT FIXES (IMPORTANT) --- */
+        @media (max-width: 768px) {
+            /* Header adjustments */
+            .sn-header { padding: 0.8rem 0; }
+            .sn-logo-text { font-size: 1.8rem; }
+            
+            .stats-container {
+                gap: 10px;
+                margin-top: 10px;
+                padding: 0 10px;
+            }
+            .stat-card {
+                padding: 10px;
+                min-width: calc(50% - 10px);
+                flex-direction: column;
+                gap: 5px;
+            }
+            .stat-icon { width: 30px; height: 30px; font-size: 0.9rem; }
+            .stat-info h3 { font-size: 0.6rem; }
+            .stat-info .count { font-size: 1.2rem; }
+
+            /* Timeline Container for Mobile */
+            .timeline-wrapper {
+                padding: 240px 20px 100px 20px; /* More bottom padding to prevent overlap */
+                overflow-x: hidden;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .timeline-container {
+                display: flex;
+                flex-direction: column; /* Vertical Stack */
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            /* Vertical Line Fixed on Left */
+            .timeline-line {
+                width: 4px;
+                height: 100%;
+                left: 28px; /* Centers with the 60px node */
+                top: 0;
+                right: auto;
+                transform: none;
+            }
+
+            /* Generic Mobile Item Style */
+            .timeline-item {
+                width: 100%;
+                flex-direction: row; /* Horizontal layout: Node -> Text */
+                align-items: flex-start;
+                margin-bottom: 30px;
+            }
+
+            /* FORCE ORDER: Node First, Text Second */
+            .node {
+                order: 1; /* Always first */
+                margin: 0;
+            }
+            
+            .content-box {
+                order: 2; /* Always second */
+                position: relative;
+                top: auto !important;
+                bottom: auto !important;
+                width: auto;
+                flex: 1;
+                margin-left: 20px; /* Space from node */
+                text-align: left; /* Left align text */
+                background: rgba(255,255,255,0.03);
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid rgba(255,255,255,0.05);
+            }
+
+            /* Hide Desktop Connector lines */
+            .connector { display: none; }
+
+            /* Hide Scroll Hint on Mobile */
+            .scroll-hint { display: none !important; }
         }
 
-        /* Connector Lines */
-        .item-up .connector {
-            position: absolute;
-            bottom: 60px;
-            width: 2px;
-            height: 15px;
-            background: var(--sn-green);
-        }
+        /* Text Styles */
+        .month-label { color: var(--sn-green); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 4px; }
+        .event-title { font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
+        .week-tag { font-size: 0.75rem; opacity: 0.7; margin-top: 4px; color: #ccc; }
+        .buffer-month .event-title { opacity: 0.5; font-weight: 400; }
+        .buffer-month .node { border-color: #4b5563; box-shadow: none; }
 
-        .item-down .connector {
-            position: absolute;
-            top: 60px;
-            width: 2px;
-            height: 15px;
-            background: var(--sn-green);
-        }
-
-        .month-label {
-            color: var(--sn-green);
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 8px; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .event-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.2;
-        }
-
-        .week-tag {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            margin-top: 6px;
-            color: #ccc;
-        }
-
-        .buffer-month .event-title {
-            opacity: 0.5;
-            font-weight: 400;
-        }
-        .buffer-month .node {
-            border-color: #4b5563;
-            box-shadow: none;
-        }
-
+        /* Helper */
+        .stat-icon { color: var(--sn-bright-green); font-size: 1.2rem; }
+        .bg-icon-csa { background: rgba(3, 235, 93, 0.1); color: #03eb5d; }
+        .bg-icon-cad { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        
         .scroll-hint {
             position: fixed;
             bottom: 10px;
@@ -289,15 +284,14 @@
     <!-- 3D Fluid Background -->
     <div id="canvas-container"></div>
 
-    <!-- Header with Live Dashboard -->
+    <!-- Header -->
     <header class="sn-header">
         <h1 class="sn-logo-text">ServiceNow <span>Roadmap 2026</span></h1>
         
-        <!-- Live Stats Dashboard -->
         <div class="stats-container">
             <!-- CSA Stats -->
             <div class="stat-card">
-                <div class="stat-icon bg-green-500/20 text-green-400">
+                <div class="stat-icon bg-icon-csa flex items-center justify-center rounded-full w-10 h-10">
                     <i class="fas fa-user-cog"></i>
                 </div>
                 <div class="stat-info">
@@ -311,7 +305,7 @@
 
             <!-- CAD Stats -->
             <div class="stat-card">
-                <div class="stat-icon bg-blue-500/20 text-blue-400">
+                <div class="stat-icon bg-icon-cad flex items-center justify-center rounded-full w-10 h-10">
                     <i class="fas fa-code"></i>
                 </div>
                 <div class="stat-info">
@@ -325,8 +319,8 @@
         </div>
     </header>
 
-    <!-- Horizontal Timeline Section -->
-    <main class="min-h-screen flex items-center">
+    <!-- Timeline Section -->
+    <main class="min-h-screen">
         <div class="timeline-wrapper" id="timelineScroll">
             <div class="timeline-container">
                 <div class="timeline-line"></div>
@@ -342,7 +336,7 @@
                     <div class="node">01</div>
                 </div>
 
-                <!-- 2. Feb 9: Project 1 Kickoff -->
+                <!-- 2. Feb 9 -->
                 <div class="timeline-item item-down">
                     <div class="node">02</div>
                     <div class="connector"></div>
@@ -353,7 +347,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Feb 2nd/3rd Week -->
+                <!-- 3. Feb Expert -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">February</div>
@@ -364,7 +358,7 @@
                     <div class="node">03</div>
                 </div>
 
-                <!-- 4. Feb Last Week -->
+                <!-- 4. Feb Last -->
                 <div class="timeline-item item-down">
                     <div class="node">04</div>
                     <div class="connector"></div>
@@ -375,7 +369,7 @@
                     </div>
                 </div>
 
-                <!-- 5. March 6: Project 1 Final Review -->
+                <!-- 5. Mar 6 -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">March 6</div>
@@ -386,7 +380,7 @@
                     <div class="node">05</div>
                 </div>
 
-                <!-- 6. March 1st Week -->
+                <!-- 6. Mar 1st -->
                 <div class="timeline-item item-down">
                     <div class="node">06</div>
                     <div class="connector"></div>
@@ -397,7 +391,7 @@
                     </div>
                 </div>
 
-                <!-- 7. March 1st Week: Project 2 Use Case -->
+                <!-- 7. Mar 1st Project 2 -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">March</div>
@@ -408,7 +402,7 @@
                     <div class="node">07</div>
                 </div>
 
-                <!-- 8. March 2nd Week: Resume Submission -->
+                <!-- 8. Mar 2nd Resume -->
                 <div class="timeline-item item-down">
                     <div class="node">08</div>
                     <div class="connector"></div>
@@ -419,7 +413,7 @@
                     </div>
                 </div>
 
-                <!-- 9. March Full: Problem Solving -->
+                <!-- 9. Mar Problem Solving -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">March</div>
@@ -430,7 +424,7 @@
                     <div class="node">09</div>
                 </div>
 
-                <!-- 10. April 1st/2nd Week: Project 2 Review -->
+                <!-- 10. April Project 2 Review -->
                 <div class="timeline-item item-down">
                     <div class="node">10</div>
                     <div class="connector"></div>
@@ -441,7 +435,7 @@
                     </div>
                 </div>
 
-                <!-- 11. April / May -->
+                <!-- 11. April/May AI Summit -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">April / May</div>
@@ -463,7 +457,7 @@
                     </div>
                 </div>
 
-                <!-- 13. July -->
+                <!-- 13. July Hackathon -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">July</div>
@@ -485,7 +479,7 @@
                     </div>
                 </div>
 
-                <!-- 15. September -->
+                <!-- 15. September Hiring -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">September</div>
@@ -496,7 +490,7 @@
                     <div class="node">15</div>
                 </div>
 
-                <!-- 16. Oct to Dec -->
+                <!-- 16. Oct-Dec -->
                 <div class="timeline-item item-down buffer-month">
                     <div class="node">16</div>
                     <div class="connector"></div>
@@ -507,7 +501,7 @@
                     </div>
                 </div>
 
-                <!-- 17. Jan to July 2027 -->
+                <!-- 17. Internship -->
                 <div class="timeline-item item-up">
                     <div class="content-box">
                         <div class="month-label">January — July 2027</div>
@@ -518,7 +512,7 @@
                     <div class="node">17</div>
                 </div>
 
-                <!-- 18. July 2027 -->
+                <!-- 18. Conversion -->
                 <div class="timeline-item item-down">
                     <div class="node">18</div>
                     <div class="connector"></div>
@@ -550,7 +544,6 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-            // Create a fluid, wave-like grid
             const geometry = new THREE.PlaneGeometry(30, 15, 80, 40);
             const material = new THREE.MeshPhongMaterial({
                 color: 0x1d2d2d,
@@ -590,12 +583,10 @@
             for (let i = 0; i < pos.count; i++) {
                 const x = pos.getX(i);
                 const y = pos.getY(i);
-                // Complex wave movement
                 const z = Math.sin(x * 0.3 + time) * 0.8 + Math.cos(y * 0.3 + time) * 0.8;
                 pos.setZ(i, z);
             }
             pos.needsUpdate = true;
-            
             renderer.render(scene, camera);
         }
 
@@ -604,14 +595,13 @@
             const counters = document.querySelectorAll('.count');
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
-                const duration = 2000; // 2 seconds
-                const increment = target / (duration / 16); // 60fps
+                const duration = 2000;
+                const increment = target / (duration / 16);
                 
                 if (target === 0) {
                     counter.innerText = 0;
                     return;
                 }
-
                 let current = 0;
                 const updateCount = () => {
                     current += increment;
@@ -629,7 +619,8 @@
         // --- Custom Horizontal Scroll ---
         const scrollContainer = document.getElementById('timelineScroll');
         scrollContainer.addEventListener('wheel', (evt) => {
-            if (evt.deltaY !== 0) {
+            // Only apply horizontal scroll logic on desktop (when container is scrollable horizontally)
+            if (window.innerWidth > 768 && evt.deltaY !== 0) {
                 evt.preventDefault();
                 scrollContainer.scrollLeft += evt.deltaY;
             }
@@ -637,7 +628,7 @@
 
         window.onload = () => {
             init3D();
-            setTimeout(animateStats, 500); // Start stats animation after slight delay
+            setTimeout(animateStats, 500);
         };
     </script>
 </body>
