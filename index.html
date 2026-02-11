@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ServiceNow Roadmap 2026</title>
     
-    <!-- ServiceNow Favicon -->
+    <!-- ServiceNow Favicon (Official) -->
     <link rel="icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="https://www.servicenow.com/favicon.ico" type="image/x-icon">
     
@@ -90,6 +90,15 @@
             gap: 1rem;
             min-width: 220px;
             backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        /* Stats Hover Effect */
+        .stat-card:hover {
+            border-color: var(--sn-green);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         /* --- TIMELINE WRAPPER (DESKTOP) --- */
@@ -132,6 +141,7 @@
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
+            cursor: pointer; /* Makes the whole item feel interactive */
         }
 
         .node {
@@ -145,12 +155,27 @@
             justify-content: center;
             font-weight: 800;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(129, 181, 161, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Smooth bounce */
+            box-shadow: 0 0 20px rgba(129, 181, 161, 0.2);
             cursor: pointer;
             position: relative;
             z-index: 5;
             flex-shrink: 0;
+        }
+
+        /* --- PREMIUM HOVER EFFECT (RESTORED & ENHANCED) --- */
+        .timeline-item:hover .node {
+            transform: scale(1.2);
+            border-color: var(--sn-bright-green);
+            background-color: rgba(3, 235, 93, 0.05); /* Slight internal tint */
+            box-shadow: 0 0 35px rgba(3, 235, 93, 0.6), inset 0 0 10px rgba(3, 235, 93, 0.2); /* Outer + Inner glow */
+            color: #fff;
+            text-shadow: 0 0 10px rgba(3, 235, 93, 0.9); /* Glowing text */
+        }
+        
+        .timeline-item:hover .event-title {
+            color: var(--sn-bright-green);
+            transition: color 0.3s ease;
         }
 
         .content-box {
@@ -164,8 +189,14 @@
         @media (min-width: 769px) {
             .item-up .content-box { bottom: 95px; }
             .item-down .content-box { top: 95px; }
-            .item-up .connector { position: absolute; bottom: 60px; width: 2px; height: 15px; background: var(--sn-green); }
-            .item-down .connector { position: absolute; top: 60px; width: 2px; height: 15px; background: var(--sn-green); }
+            .item-up .connector { position: absolute; bottom: 60px; width: 2px; height: 15px; background: var(--sn-green); transition: all 0.3s ease; }
+            .item-down .connector { position: absolute; top: 60px; width: 2px; height: 15px; background: var(--sn-green); transition: all 0.3s ease; }
+            
+            /* Connector Hover */
+            .timeline-item:hover .connector {
+                background: var(--sn-bright-green);
+                box-shadow: 0 0 10px rgba(3, 235, 93, 0.5);
+            }
         }
 
         /* --- MOBILE LAYOUT FIXES (IMPORTANT) --- */
@@ -191,7 +222,7 @@
 
             /* Timeline Container for Mobile */
             .timeline-wrapper {
-                padding: 240px 20px 100px 20px; /* More bottom padding to prevent overlap */
+                padding: 240px 20px 100px 20px;
                 overflow-x: hidden;
                 overflow-y: auto;
                 height: auto;
@@ -199,7 +230,7 @@
 
             .timeline-container {
                 display: flex;
-                flex-direction: column; /* Vertical Stack */
+                flex-direction: column; 
                 align-items: flex-start;
                 width: 100%;
             }
@@ -208,7 +239,7 @@
             .timeline-line {
                 width: 4px;
                 height: 100%;
-                left: 28px; /* Centers with the 60px node */
+                left: 28px;
                 top: 0;
                 right: auto;
                 transform: none;
@@ -217,36 +248,33 @@
             /* Generic Mobile Item Style */
             .timeline-item {
                 width: 100%;
-                flex-direction: row; /* Horizontal layout: Node -> Text */
+                flex-direction: row; 
                 align-items: flex-start;
                 margin-bottom: 30px;
             }
 
             /* FORCE ORDER: Node First, Text Second */
             .node {
-                order: 1; /* Always first */
+                order: 1; 
                 margin: 0;
             }
             
             .content-box {
-                order: 2; /* Always second */
+                order: 2; 
                 position: relative;
                 top: auto !important;
                 bottom: auto !important;
                 width: auto;
                 flex: 1;
-                margin-left: 20px; /* Space from node */
-                text-align: left; /* Left align text */
+                margin-left: 20px;
+                text-align: left;
                 background: rgba(255,255,255,0.03);
                 padding: 15px;
                 border-radius: 8px;
                 border: 1px solid rgba(255,255,255,0.05);
             }
 
-            /* Hide Desktop Connector lines */
             .connector { display: none; }
-
-            /* Hide Scroll Hint on Mobile */
             .scroll-hint { display: none !important; }
         }
 
